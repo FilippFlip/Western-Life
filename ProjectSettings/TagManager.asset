@@ -7,6 +7,7 @@ TagManager:
   - FxTemporaire
   - skelet
   - ground
+  - Trap
   layers:
   - Default
   - TransparentFX
