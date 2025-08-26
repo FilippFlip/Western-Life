@@ -6,12 +6,17 @@ public class Trap : MonoBehaviour
     private Collider[] skeletons;
     public ParticleSystem explosionEffect;
     private bool isTriggered;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
+    public AudioClip buildingSound;
+    public AudioClip explosionSound;
+    public AudioClip afterEffectSound;
+
+    public AudioSource audioSource;
+    private void Start()
+    {
+        audioSource.clip = buildingSound;
+        audioSource.Play();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -19,11 +24,16 @@ public class Trap : MonoBehaviour
     }
     private async void OnTriggerEnter(Collider other)
     {
+
         if (other.tag == "skelet"&&isTriggered==false)
         {
+            audioSource.clip = explosionSound;
+            audioSource.Play();
+
             skeletons = Physics.OverlapSphere(transform.position, explosionRadius);
             foreach (Collider c in skeletons)
             {
+
                 if (c.TryGetComponent(out EnemyController enemy))
                 {
                     enemy.Death();
@@ -32,6 +42,9 @@ public class Trap : MonoBehaviour
             }
             isTriggered = true;
             explosionEffect.Play();
+            await Awaitable.WaitForSecondsAsync(2);
+            audioSource.clip = afterEffectSound;
+            audioSource.Play();
             await Awaitable.WaitForSecondsAsync(10);
             Destroy(gameObject);
 
