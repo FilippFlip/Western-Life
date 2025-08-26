@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bb14648df71ede4f93467dc67460a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionRadius: 3
   explosionEffect: {fileID: 774220304836072144}
 --- !u!54 &-2285167119024410881
 Rigidbody:
