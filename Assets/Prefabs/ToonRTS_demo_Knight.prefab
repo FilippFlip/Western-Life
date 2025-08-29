@@ -118,8 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33dd9832f02198b4f96b6206d5f09ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPoint: {fileID: 0}
-  defendPoint: {fileID: 0}
+  detectionRadius: 10
 --- !u!195 &6991064490273305712
 NavMeshAgent:
   m_ObjectHideFlags: 0
