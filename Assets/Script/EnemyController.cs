@@ -13,7 +13,6 @@ public class EnemyController : MonoBehaviour
     private Collider parentCollider;
     public float force;
     private int crab;
-    // Start is called before the first frame update
     void Start()
     {
         
@@ -24,9 +23,6 @@ public class EnemyController : MonoBehaviour
         parentCollider = GetComponent<Collider>();  
 
     }
-
-
-    // Update is called once per frame
     void Update()
     {
         Navigation();
