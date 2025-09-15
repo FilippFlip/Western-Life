@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/Scenes/Canyon.unity
+    guid: c4c0a1d623318a6459abfb03994edd0b
+  - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: f57303c02c26e3146a840f6f7fa49358
   - enabled: 1
