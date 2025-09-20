@@ -5,32 +5,34 @@ public class KnightController : MonoBehaviour
 {
     public float detectionRadius = 5f;
     private NavMeshAgent agent;
-    private Vector3 targetPosition;
+    private Transform target;
     private EnemyController currentEnemy;
+    private Animator animator;
 
     void Awake()
     {
+        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
     }
 
-    public void SetTarget(Vector3 position)
+    public void SetTarget(Transform position)
     {
-        targetPosition = position;
+        target = position;
         currentEnemy = null;
-        agent.SetDestination(targetPosition);
+        agent.SetDestination(target.position);
     }
 
     void Update()
     {
         DetectEnemies();
-
+        AnimationController();
         if (currentEnemy != null)
         {
             agent.SetDestination(currentEnemy.transform.position);
         }
         else
         {
-            agent.SetDestination(targetPosition);
+            agent.SetDestination(target.position);
         }
     }
 
@@ -57,10 +59,31 @@ public class KnightController : MonoBehaviour
 
         currentEnemy = nearestEnemy;
     }
+    private void AnimationController()
+    {
+        if (target == null && currentEnemy == null)
+        {
+            animator.SetBool("idle", true);
+            animator.SetBool("attack", false);
+            animator.SetBool("run", false);
 
+        }
+        if(target !=null || currentEnemy != null)
+        {
+            var distance = Vector3.Distance(transform.position, currentEnemy.transform.position);
+            if (currentEnemy != null && distance >= 1)
+            {
+                animator.SetBool("idle", false);
+                animator.SetBool("attack", false);
+                animator.SetBool("run", true);
+            }
+        }
+
+    }
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
+
 }
