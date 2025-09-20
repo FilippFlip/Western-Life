@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 10
+  attackRange: 2
 --- !u!195 &6991064490273305712
 NavMeshAgent:
   m_ObjectHideFlags: 0

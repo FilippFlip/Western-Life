@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,7 +9,7 @@ public class KnightController : MonoBehaviour
     private Transform target;
     private EnemyController currentEnemy;
     private Animator animator;
-
+    public float attackRange;
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -30,7 +31,7 @@ public class KnightController : MonoBehaviour
         {
             agent.SetDestination(currentEnemy.transform.position);
         }
-        else
+        else if(target!=null)
         {
             agent.SetDestination(target.position);
         }
@@ -71,19 +72,29 @@ public class KnightController : MonoBehaviour
         if(target !=null || currentEnemy != null)
         {
             var distance = Vector3.Distance(transform.position, currentEnemy.transform.position);
-            if (currentEnemy != null && distance >= 1)
+            if (currentEnemy != null && distance >= attackRange)
             {
                 animator.SetBool("idle", false);
                 animator.SetBool("attack", false);
                 animator.SetBool("run", true);
             }
         }
-
+        if (currentEnemy != null)
+        {
+            var distance = Vector3.Distance(transform.position, currentEnemy.transform.position);
+            if (distance < attackRange)
+            {
+                animator.SetBool("idle", false);
+                animator.SetBool("attack", true);
+                animator.SetBool("run", false);
+            }
+        }
     }
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
+
 
 }

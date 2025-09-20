@@ -13,6 +13,9 @@ public class EnemyController : MonoBehaviour
     private Collider parentCollider;
     public float force;
     private int crab;
+    public float detectionRadius;
+    private KnightController currentEnemy;
+
     void Start()
     {
         
@@ -25,6 +28,7 @@ public class EnemyController : MonoBehaviour
     }
     void Update()
     {
+        DetectEnemies();
         Navigation();
 
         if (ragdolState==true)
@@ -76,6 +80,11 @@ public class EnemyController : MonoBehaviour
     }
     private void Navigation()
     {
+        if (currentEnemy != null)
+        {
+            agent.SetDestination(currentEnemy.transform.position);
+            return;
+        }
         if (crab >= 5)
         {
             return;
@@ -103,8 +112,30 @@ public class EnemyController : MonoBehaviour
             agent.SetDestination(target.transform.position);
             
         }
-            
+          
         
     }
+    private void DetectEnemies()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
 
+        KnightController nearestEnemy = null;
+        float nearestDistance = Mathf.Infinity;
+
+        foreach (var col in colliders)
+        {
+            KnightController enemy = col.GetComponent<KnightController>();
+            if (enemy != null)
+            {
+                float dist = Vector3.Distance(transform.position, enemy.transform.position);
+                if (dist < nearestDistance)
+                {
+                    nearestDistance = dist;
+                    nearestEnemy = enemy;
+                }
+            }
+        }
+
+        currentEnemy = nearestEnemy;
+    }
 }
