@@ -15,15 +15,17 @@ public class EnemyController : MonoBehaviour
     private int crab;
     public float detectionRadius;
     private KnightController currentEnemy;
+    private Animator animator;
+    public float attackRange;
 
     void Start()
-    {
-        
+    {      
         agent = GetComponent<NavMeshAgent>();
         ragdoll.AddRange(GetComponentsInChildren<Collider>());
         rbs.AddRange(GetComponentsInChildren<Rigidbody>());
         ragdoll.Remove(GetComponent<Collider>());
         parentCollider = GetComponent<Collider>();  
+        animator=GetComponent<Animator>();
 
     }
     void Update()
@@ -137,5 +139,35 @@ public class EnemyController : MonoBehaviour
         }
 
         currentEnemy = nearestEnemy;
+    }
+    private void AnimationController()
+    {
+        if (target == null && currentEnemy == null)
+        {
+            animator.SetBool("idle", true);
+            animator.SetBool("attack", false);
+            animator.SetBool("run", false);
+
+        }
+        if (target != null || currentEnemy != null)
+        {
+            var distance = Vector3.Distance(transform.position, currentEnemy.transform.position);
+            if (currentEnemy != null && distance >= attackRange)
+            {
+                animator.SetBool("idle", false);
+                animator.SetBool("attack", false);
+                animator.SetBool("run", true);
+            }
+        }
+        if (currentEnemy != null)
+        {
+            var distance = Vector3.Distance(transform.position, currentEnemy.transform.position);
+            if (distance < attackRange)
+            {
+                animator.SetBool("idle", false);
+                animator.SetBool("attack", true);
+                animator.SetBool("run", false);
+            }
+        }
     }
 }

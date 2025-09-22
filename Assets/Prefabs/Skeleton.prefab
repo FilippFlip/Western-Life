@@ -2889,6 +2889,7 @@ MonoBehaviour:
   rbs: []
   force: 250
   detectionRadius: 7.5
+  attackRange: 2.5
 --- !u!136 &2069699194592574863
 CapsuleCollider:
   m_ObjectHideFlags: 0
