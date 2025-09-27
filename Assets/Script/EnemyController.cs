@@ -32,6 +32,7 @@ public class EnemyController : MonoBehaviour
     {
         DetectEnemies();
         Navigation();
+        AnimationController();
 
         if (ragdolState==true)
         {
@@ -151,13 +152,17 @@ public class EnemyController : MonoBehaviour
         }
         if (target != null || currentEnemy != null)
         {
-            var distance = Vector3.Distance(transform.position, currentEnemy.transform.position);
-            if (currentEnemy != null && distance >= attackRange)
+            if (currentEnemy != null)
             {
-                animator.SetBool("idle", false);
-                animator.SetBool("attack", false);
-                animator.SetBool("run", true);
+                var distance = Vector3.Distance(transform.position, currentEnemy.transform.position);
+                if (distance >= attackRange)
+                {
+                    animator.SetBool("idle", false);
+                    animator.SetBool("attack", false);
+                    animator.SetBool("run", true);
+                }
             }
+            
         }
         if (currentEnemy != null)
         {
