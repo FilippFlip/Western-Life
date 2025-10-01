@@ -635,17 +635,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 58.204803
+      value: 177.71405
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.029994754
+      value: -0.03000286
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -768.6342
+      value: -535.0634
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf,
         type: 3}
@@ -1949,6 +1949,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4612251415137688996}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2686648709960711779}
     - targetCorrespondingSourceObject: {fileID: -5067417469064874575, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf,
         type: 3}
       insertIndex: -1
@@ -2855,6 +2859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b85f1fc4514f2c41881c2dbb8d130a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minimumDamagePeriod: 0.25
 --- !u!1 &5729595064271509492 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5067417469064874575, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf,
@@ -3164,6 +3169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b85f1fc4514f2c41881c2dbb8d130a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minimumDamagePeriod: 0.25
 --- !u!4 &8129093693967926497 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 504158339318998692, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf,
@@ -3304,7 +3310,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.5
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -3381,7 +3387,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3c78dfbb602ea24d94faa3cff0ccf34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
-  currentHp: 100
+  maxHp: 250
+  currentHp: 250
   healthBar: {fileID: 934661349856055148}
   healthText: {fileID: 7213914770419845137}
+  fraction: 1
+--- !u!54 &2686648709960711779
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858051749441068820}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

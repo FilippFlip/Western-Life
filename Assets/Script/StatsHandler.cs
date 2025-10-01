@@ -8,18 +8,12 @@ public class StatsHandler : MonoBehaviour
     public int currentHp;
     public Image healthBar;
     public TMP_Text healthText;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public Fraction fraction;
     void Start()
     {
-        
+        ChangeHealth(0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void ChangeHealth(int change)
     {
         currentHp = currentHp + change;
@@ -32,6 +26,6 @@ public class StatsHandler : MonoBehaviour
             currentHp = 0;
         }
         healthBar.fillAmount = (float)currentHp / maxHp;
-        healthText.text= ((float)currentHp / maxHp).ToString()+"%";
+        healthText.text= ((float)currentHp / maxHp)*100 + "%";
     }
 }
