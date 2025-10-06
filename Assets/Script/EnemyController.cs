@@ -17,16 +17,25 @@ public class EnemyController : MonoBehaviour
     private KnightController currentEnemy;
     private Animator animator;
     public float attackRange;
-
-    void Start()
-    {      
+    private StatsHandler statsHandler;
+    void Awake()
+    {     
+        statsHandler=GetComponent<StatsHandler>();
         agent = GetComponent<NavMeshAgent>();
         ragdoll.AddRange(GetComponentsInChildren<Collider>());
         rbs.AddRange(GetComponentsInChildren<Rigidbody>());
         ragdoll.Remove(GetComponent<Collider>());
         parentCollider = GetComponent<Collider>();  
         animator=GetComponent<Animator>();
-
+        ragdoll.RemoveAll(a=> a.gameObject.GetComponent<StatsHandler>()!=null);
+    }
+    private void OnEnable()
+    {
+        statsHandler.OnDeath += Death;
+    }
+    private void OnDisable()
+    {
+        statsHandler.OnDeath -= Death;
     }
     void Update()
     {
@@ -71,12 +80,17 @@ public class EnemyController : MonoBehaviour
     }
     public void Death()
     {
+        statsHandler.enabled = false;
         ragdolState = true;
         GetComponent<Animator>().enabled = false;
         agent.enabled = false;
         parentCollider.enabled = false;
         foreach (Collider collider in ragdoll)
         {
+            if(collider.TryGetComponent(out StatsHandler _))
+            {
+                continue;
+            }
             collider.GetComponent<Rigidbody>().AddForce(Vector3.up * force);
         }
         Destroy(gameObject, 10);
@@ -162,7 +176,12 @@ public class EnemyController : MonoBehaviour
                     animator.SetBool("run", true);
                 }
             }
-            
+            else
+            {
+                animator.SetBool("idle", false);
+                animator.SetBool("attack", false);
+                animator.SetBool("run", true);
+            }
         }
         if (currentEnemy != null)
         {
