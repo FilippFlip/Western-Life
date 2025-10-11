@@ -20,7 +20,8 @@ public class Gold : MonoBehaviour
     {
         OnGoldDestroyed?.Invoke(this);
     }
-    private Rigidbody rb;private void Awake()
+    private Rigidbody rb;
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
