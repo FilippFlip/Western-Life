@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour
 {
     public float lifeTime;
     public ParticleSystem impact;
+    public int damage;
+
     // Start is called before the first frame update
     void Start()
     {
