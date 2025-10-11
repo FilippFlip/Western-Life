@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,7 +9,6 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent agent;
     private Gold target;
     public List<Collider> ragdoll = new List<Collider>();
-    public bool ragdolState;
     public List<Rigidbody> rbs = new List<Rigidbody>();
     private Collider parentCollider;
     public float force;
@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
     private Animator animator;
     public float attackRange;
     private StatsHandler statsHandler;
+    private float timer;
     void Awake()
     {     
         statsHandler=GetComponent<StatsHandler>();
@@ -27,61 +28,57 @@ public class EnemyController : MonoBehaviour
         ragdoll.Remove(GetComponent<Collider>());
         parentCollider = GetComponent<Collider>();  
         animator=GetComponent<Animator>();
-        ragdoll.RemoveAll(a=> a.gameObject.GetComponent<StatsHandler>()!=null);
+        ragdoll.RemoveAll(a=> a.gameObject.GetComponent<DamageArea>()!=null);
+        SetRagdollState(false);
     }
     private void OnEnable()
     {
+        UpdateTarget();
+        GoldCountUi.OnGoldListChanged += UpdateTarget;
         statsHandler.OnDeath += Death;
     }
     private void OnDisable()
     {
+        GoldCountUi.OnGoldListChanged -= UpdateTarget;
         statsHandler.OnDeath -= Death;
     }
     void Update()
     {
-        DetectEnemies();
+        timer += Time.deltaTime;    
+        if (timer >= 0.25f)
+        {
+            DetectEnemies();
+            timer = 0;
+        }
         Navigation();
         AnimationController();
-
-        if (ragdolState==true)
-        {
-            foreach (Collider collider in ragdoll)
-            {
-                collider.enabled = true;
-            }
-        }
-        if (ragdolState == false)
-        {
-            foreach(Collider collider in ragdoll) 
-            { 
-                collider.enabled = false; 
-            
-            }
-        }
-        foreach(Rigidbody rb in rbs)
-        {
-            rb.useGravity = ragdolState;
-        }
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.TryGetComponent<Bullet>(out Bullet b))
+        if(collision.gameObject.TryGetComponent(out Bullet b))
         {
             Death();
             
         }
-        if(collision.gameObject.TryGetComponent<Gold>(out Gold c)&&crab<5)
+        if(collision.gameObject.TryGetComponent(out Gold c) && crab < 5)
         {
-            
-                Destroy(c.gameObject);
-                crab++;
-                
+            if (c == target) target = null;
+            Destroy(c.gameObject);
+            crab++;
         }
     }
-    public void Death()
+    private void SetRagdollState(bool state)
+    {
+        foreach (var col in ragdoll)
+            col.enabled = state;
+
+        foreach (var rb in rbs)
+            rb.useGravity = state;
+    }
+    public async void Death()
     {
         statsHandler.enabled = false;
-        ragdolState = true;
+        SetRagdollState(true);
         GetComponent<Animator>().enabled = false;
         agent.enabled = false;
         parentCollider.enabled = false;
@@ -93,44 +90,22 @@ public class EnemyController : MonoBehaviour
             }
             collider.GetComponent<Rigidbody>().AddForce(Vector3.up * force);
         }
+
+        await Awaitable.WaitForSecondsAsync(1);
+        GetComponentInChildren<Bilboard>().gameObject.SetActive(false);
         Destroy(gameObject, 10);
     }
     private void Navigation()
     {
+        if (agent == null || !agent.enabled) return;
+
         if (currentEnemy != null)
         {
             agent.SetDestination(currentEnemy.transform.position);
             return;
         }
-        if (crab >= 5)
-        {
-            return;
-        }
-        if (target == null)
-        {
-            Gold nearest = null;
-            float minDistance = Mathf.Infinity;
-            Vector3 myPos = transform.position;
-            foreach (Gold obj in FindObjectsOfType<Gold>())
-            {
-                float dist = Vector3.Distance(myPos, obj.transform.position);
-                if (dist < minDistance)
-                {
-                    minDistance = dist;
-                    nearest = obj;
-                }
-            }
-            target= nearest;
-        }
-        
-
-        if (target != null && agent.enabled == true)
-        {
+        if(target != null && crab < 5)
             agent.SetDestination(target.transform.position);
-            
-        }
-          
-        
     }
     private void DetectEnemies()
     {
@@ -154,6 +129,33 @@ public class EnemyController : MonoBehaviour
         }
 
         currentEnemy = nearestEnemy;
+    }
+    private void UpdateTarget()
+    {
+        if (crab >= 5)
+        {
+            target = null; 
+            return;
+        }
+
+        Gold nearest = null;
+        float minDist = float.MaxValue;
+
+        for (int i = 0; i < GoldCountUi.AllGold.Count; i++)
+        {
+            var g = GoldCountUi.AllGold[i];
+            float dist = (g.transform.position - transform.position).sqrMagnitude;
+            if (dist < minDist)
+            {
+                minDist = dist;
+                nearest = g;
+            }
+        }
+
+        target = nearest;
+
+        if (target != null)
+            agent.SetDestination(target.transform.position);
     }
     private void AnimationController()
     {

@@ -1,3 +1,4 @@
+using System;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,20 +10,14 @@ public class KnightController : MonoBehaviour
     private Transform target;
     private EnemyController currentEnemy;
     private Animator animator;
+    private StatsHandler statsHandler;
     public float attackRange;
     void Awake()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        statsHandler = GetComponent<StatsHandler>();
     }
-
-    public void SetTarget(Transform position)
-    {
-        target = position;
-        currentEnemy = null;
-        agent.SetDestination(target.position);
-    }
-
     void Update()
     {
         DetectEnemies();
@@ -35,8 +30,32 @@ public class KnightController : MonoBehaviour
         {
             agent.SetDestination(target.position);
         }
+        if (currentEnemy != null)
+        {
+            float distance = Vector3.Distance(transform.position, currentEnemy.transform.position);
+            if (distance <= attackRange)
+            {
+                Vector3 lookDir = currentEnemy.transform.position - transform.position;
+                lookDir.y = 0;
+                if (lookDir != Vector3.zero)
+                    transform.rotation = Quaternion.LookRotation(lookDir);
+            }
+        }
     }
-
+    private void OnEnable()
+    {
+        statsHandler.OnDeath += Death;
+    }
+    private void OnDisable()
+    {
+        statsHandler.OnDeath -= Death;
+    }
+    public void SetTarget(Transform position)
+    {
+        target = position;
+        currentEnemy = null;
+        agent.SetDestination(target.position);
+    }
     private void DetectEnemies()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
@@ -99,6 +118,9 @@ public class KnightController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
-
+    private void Death()
+    {
+        Destroy(gameObject);
+    }
 
 }
