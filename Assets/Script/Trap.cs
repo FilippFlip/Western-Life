@@ -11,6 +11,7 @@ public class Trap : MonoBehaviour
     public AudioClip explosionSound;
     public AudioClip afterEffectSound;
 
+    public int trapDamage;
     public AudioSource audioSource;
     private void Start()
     {
@@ -31,7 +32,7 @@ public class Trap : MonoBehaviour
             {
                 if (c.TryGetComponent(out EnemyController enemy))
                 {
-                    enemy.Death();
+                    enemy.GetComponent<StatsHandler>().ChangeHealth(-trapDamage);
                 }
             }
             isTriggered = true;

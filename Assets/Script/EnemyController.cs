@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,6 +20,8 @@ public class EnemyController : MonoBehaviour
     public float attackRange;
     private StatsHandler statsHandler;
     private float timer;
+    public static event Action<int> OnEnemyDeath;
+    public int killingReward;
     void Awake()
     {     
         statsHandler=GetComponent<StatsHandler>();
@@ -57,7 +60,7 @@ public class EnemyController : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent(out Bullet b))
         {
-            Death();
+            statsHandler.ChangeHealth(-b.damage);
             
         }
         if(collision.gameObject.TryGetComponent(out Gold c) && crab < 5)
@@ -77,6 +80,7 @@ public class EnemyController : MonoBehaviour
     }
     public async void Death()
     {
+        OnEnemyDeath?.Invoke(killingReward);
         statsHandler.enabled = false;
         SetRagdollState(true);
         GetComponent<Animator>().enabled = false;

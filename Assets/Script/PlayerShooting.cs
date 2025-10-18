@@ -16,6 +16,7 @@ public class PlayerShooting : MonoBehaviour
     public Rigidbody playerRB;
     public float shootDelay;
     public bool abortEffect;
+
     // Start is called before the first frame update
     void Start()
     {

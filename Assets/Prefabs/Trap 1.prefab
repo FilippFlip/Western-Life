@@ -75,6 +75,7 @@ MonoBehaviour:
   buildingSound: {fileID: 8300000, guid: f70ad02ec22d3ff4eac526986e481bf2, type: 3}
   explosionSound: {fileID: 8300000, guid: 7673fd575998f27458e9f50321c11401, type: 3}
   afterEffectSound: {fileID: 8300000, guid: 03455008a18a09442aa725030c02e7c3, type: 3}
+  trapDamage: 50
   audioSource: {fileID: 165955685274408317}
 --- !u!54 &-2285167119024410881
 Rigidbody:

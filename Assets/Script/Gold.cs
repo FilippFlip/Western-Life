@@ -11,8 +11,9 @@ public class Gold : MonoBehaviour
     public static event Action<Gold> OnGoldSpawned;
     public static event Action<Gold> OnGoldDestroyed;
     
-    private void OnEnable()
+    private async void OnEnable()
     {
+        await Awaitable.WaitForSecondsAsync(0.5f);
         OnGoldSpawned?.Invoke(this);
     }
 

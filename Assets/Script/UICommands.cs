@@ -13,6 +13,12 @@ public class UICommands : MonoBehaviour
     void Start()
     {
         moneyText.text = money.ToString();
+        EnemyController.OnEnemyDeath += (int a) =>
+        {
+            money += a;
+            moneyText.text = money.ToString();
+        };
+
     }
 
     // Update is called once per frame
@@ -45,6 +51,7 @@ public class UICommands : MonoBehaviour
             Instantiate(knightPrefab, player.transform.position+player.transform.forward*3, Quaternion.identity);
 
         }
+
     }
     public void Attack()
     {
