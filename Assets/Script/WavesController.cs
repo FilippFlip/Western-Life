@@ -11,7 +11,13 @@ public class WavesController : MonoBehaviour
         await SpawnWave(w[2]);
         await SpawnWave(w[3]);
         await SpawnWave(w[4]);
-        
+        await SpawnWave(w[5]);
+        await SpawnWave(w[6]);
+        await SpawnWave(w[7]);
+        await SpawnWave(w[8]);
+        await SpawnWave(w[9]);
+        await SpawnWave(w[10]);       
+
     }
     private async Awaitable SpawnWave(Wave wave)
     {
