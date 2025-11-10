@@ -4,6 +4,7 @@ using UnityEngine;
 public class WavesController : MonoBehaviour
 {
     public Wave[] w;
+    public Transform[] s;
     private async void Start()
     {
         await SpawnWave(w[0]);
@@ -24,7 +25,10 @@ public class WavesController : MonoBehaviour
         for (int i = 0; i < wave.enemyCount; i++)
         {
             await Awaitable.WaitForSecondsAsync(wave.spawnSpeed);
-            Instantiate(wave.enemyPrefab, transform.position, Quaternion.identity);
+            int random = UnityEngine.Random.Range(0, 3);
+
+            Vector3 position = s[random].position;
+            Instantiate(wave.enemyPrefab, position, Quaternion.identity);
 
         }
         await Awaitable.WaitForSecondsAsync(wave.spawnTimeOut);

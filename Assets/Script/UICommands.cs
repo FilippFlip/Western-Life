@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UICommands : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class UICommands : MonoBehaviour
     public GameObject knightPrefab;
     public int money;
     public TMP_Text moneyText;
+    public float commandRadius = 15;
+    public Image panelEarningMoney;
+    public int moneyPerSec;
+    public float secForMoney;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,10 +36,12 @@ public class UICommands : MonoBehaviour
             if (panel.activeSelf)
             {
                 Cursor.lockState = CursorLockMode.None;
+                player.GetComponent<PlayerController>().rotationSpeed = 35;
             }
             else
             {
                 Cursor.lockState = CursorLockMode.Locked;
+                player.GetComponent<PlayerController>().rotationSpeed = 150;
             }
         }
         if (Input.GetKeyDown(KeyCode.E)&&money>=10)
@@ -51,15 +58,39 @@ public class UICommands : MonoBehaviour
             Instantiate(knightPrefab, player.transform.position+player.transform.forward*3, Quaternion.identity);
 
         }
-
+        MoneyOverTime();
     }
-    public void Attack()
+    public void Follow()
     {
-
+        var colliders=Physics.OverlapSphere(player.transform.position, commandRadius);
+        foreach (var collider in colliders)
+        {
+            if (collider.TryGetComponent(out KnightController knight))
+            {
+                knight.followPlayer = true;
+            }
+        }
     }
     public void Defend()
     {
-
+        var colliders = Physics.OverlapSphere(player.transform.position, commandRadius);
+        foreach (var collider in colliders)
+        {
+            if (collider.TryGetComponent(out KnightController knight))
+            {
+                knight.followPlayer = false;
+            }
+        }
+    }
+    public void MoneyOverTime()
+    {
+        panelEarningMoney.fillAmount += 1 / secForMoney * Time.deltaTime;
+        if (panelEarningMoney.fillAmount==1)
+        {
+            panelEarningMoney.fillAmount = 0;
+            money += moneyPerSec;
+            moneyText.text = money.ToString();
+        }
     }
 
 }

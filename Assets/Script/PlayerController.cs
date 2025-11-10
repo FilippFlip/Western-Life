@@ -26,7 +26,15 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     async void Update()
-    {      
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            moveSpeed = moveSpeed * 2;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            moveSpeed = moveSpeed / 2;
+        }
         mouseX = Input.GetAxis("Mouse X")*rotationSpeed*Time.deltaTime;
         mouseY = Input.GetAxis("Mouse Y")*rotationSpeed*Time.deltaTime;
         transform.Rotate(0 , mouseX, 0);

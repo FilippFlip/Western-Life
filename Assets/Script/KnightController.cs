@@ -12,35 +12,27 @@ public class KnightController : MonoBehaviour
     private Animator animator;
     private StatsHandler statsHandler;
     public float attackRange;
+    public bool followPlayer;
+    private PlayerController player;
+    public AudioClip[] deathSounds;
+    public AudioClip[] startSounds;
+    private AudioSource audioSource;
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         statsHandler = GetComponent<StatsHandler>();
+        player = FindAnyObjectByType<PlayerController>();
+        audioSource.clip = startSounds[UnityEngine.Random.Range(0, startSounds.Length)];
+        audioSource.Play();
     }
     void Update()
     {
         DetectEnemies();
         AnimationController();
-        if (currentEnemy != null)
-        {
-            agent.SetDestination(currentEnemy.transform.position);
-        }
-        else if(target!=null)
-        {
-            agent.SetDestination(target.position);
-        }
-        if (currentEnemy != null)
-        {
-            float distance = Vector3.Distance(transform.position, currentEnemy.transform.position);
-            if (distance <= attackRange)
-            {
-                Vector3 lookDir = currentEnemy.transform.position - transform.position;
-                lookDir.y = 0;
-                if (lookDir != Vector3.zero)
-                    transform.rotation = Quaternion.LookRotation(lookDir);
-            }
-        }
+        Navigation();
+        
     }
     private void OnEnable()
     {
@@ -120,7 +112,43 @@ public class KnightController : MonoBehaviour
     }
     private void Death()
     {
-        Destroy(gameObject);
+        GetComponent<Collider>().enabled = false;
+        GetComponent<Rigidbody>().isKinematic = true;
+        animator.enabled = false;
+        audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
+        audioSource.Play();
+        Destroy(gameObject, 1);
+        
     }
+    private void Navigation()
+    {
+        if (followPlayer==true)
+        {
+            target = player.transform;
+        }
+        else
+        {
+            target=null;
+        }
+        if (currentEnemy != null)
+        {
+            agent.SetDestination(currentEnemy.transform.position);
+        }
+        else if (target != null)
+        {
+            agent.SetDestination(target.position);
+        }
+        if (currentEnemy != null)
+        {
+            float distance = Vector3.Distance(transform.position, currentEnemy.transform.position);
+            if (distance <= attackRange)
+            {
+                Vector3 lookDir = currentEnemy.transform.position - transform.position;
+                lookDir.y = 0;
+                if (lookDir != Vector3.zero)
+                    transform.rotation = Quaternion.LookRotation(lookDir);
+            }
+        }
 
+    }
 }
