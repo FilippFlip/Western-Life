@@ -3392,6 +3392,7 @@ MonoBehaviour:
   healthBar: {fileID: 934661349856055148}
   healthText: {fileID: 7213914770419845137}
   fraction: 1
+  damage: 25
 --- !u!54 &2686648709960711779
 Rigidbody:
   m_ObjectHideFlags: 0

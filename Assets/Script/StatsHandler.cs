@@ -11,7 +11,7 @@ public class StatsHandler : MonoBehaviour
     public TMP_Text healthText;
     public Fraction fraction;
     public event Action OnDeath;
-
+    public int damage;
     void Start()
     {
         ChangeHealth(0);

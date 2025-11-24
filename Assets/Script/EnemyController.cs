@@ -76,7 +76,11 @@ public class EnemyController : MonoBehaviour
             col.enabled = state;
 
         foreach (var rb in rbs)
+            
+        {
             rb.useGravity = state;
+            rb.isKinematic = !state;
+        }
     }
     public async void Death()
     {
@@ -158,7 +162,7 @@ public class EnemyController : MonoBehaviour
 
         target = nearest;
 
-        if (target != null)
+        if (target != null && agent.enabled)
             agent.SetDestination(target.transform.position);
     }
     private void AnimationController()

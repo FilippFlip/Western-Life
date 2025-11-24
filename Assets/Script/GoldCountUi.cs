@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class GoldCountUi : MonoBehaviour
@@ -17,6 +18,12 @@ public class GoldCountUi : MonoBehaviour
     public static List<Gold> AllGold = new List<Gold>();
     
     public static event Action OnGoldListChanged;
+    public async void Awake()
+    {
+        GoldCount += 1;
+        await Awaitable.WaitForSecondsAsync(1);
+        GoldCount -= 1;
+    }
     private void OnEnable()
     {
         Gold.OnGoldSpawned += AddGold;
@@ -49,6 +56,7 @@ public class GoldCountUi : MonoBehaviour
             text.text = GoldCount.ToString();
             if (GoldCount <= 0)
             {
+                
                 SceneManager.LoadScene("Lose");
             }
             timer += Time.deltaTime;

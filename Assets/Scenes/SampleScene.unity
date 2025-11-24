@@ -23521,6 +23521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e907b583841404c88890a5330360ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTimerWinCondition: 1
   GoldCount: 0
   text: {fileID: 1110180312}
   battleMusic: {fileID: 8300000, guid: 212cea5453dc6154cb7823435174d986, type: 3}

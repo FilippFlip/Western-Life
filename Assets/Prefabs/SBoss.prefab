@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7924528, g: 0.15325737, b: 0.15325737, a: 0.8862745}
+  m_Color: {r: 0.5283019, g: 0.10715558, b: 0.10715558, a: 0.8862745}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1321,7 +1321,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf,
         type: 3}
       propertyPath: m_Name
-      value: Skeleton 1
+      value: SBoss
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf,
         type: 3}
@@ -2120,7 +2120,7 @@ MonoBehaviour:
   force: 250
   detectionRadius: 7.5
   attackRange: 2.5
-  killingReward: 50
+  killingReward: 250
 --- !u!136 &6459184083965966730
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2177,6 +2177,7 @@ MonoBehaviour:
   healthBar: {fileID: 2150784975816081855}
   healthText: {fileID: 7205557560465808749}
   fraction: 1
+  damage: 50
 --- !u!54 &5374680623173200950
 Rigidbody:
   m_ObjectHideFlags: 0

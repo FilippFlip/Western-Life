@@ -31,7 +31,7 @@ public class DamageArea : MonoBehaviour
         {
             if (statsHandler.fraction != stats.fraction  && canDamage)
             {
-                stats.ChangeHealth(-25);
+                stats.ChangeHealth(-statsHandler.damage);
                 canDamage = false;
             }
         }

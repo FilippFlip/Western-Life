@@ -1,12 +1,23 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WavesController : MonoBehaviour
 {
     public Wave[] w;
     public Transform[] s;
+    public int skeletonCount1;
+    private bool lastWave=false;
     private async void Start()
     {
+        EnemyController.OnEnemyDeath += (int a) =>
+        {
+            skeletonCount1 -= 1;
+            if (skeletonCount1 == 0 && lastWave == true)
+            {
+                SceneManager.LoadScene("Win");
+            }
+        };
         await SpawnWave(w[0]);
         await SpawnWave(w[1]);
         await SpawnWave(w[2]);
@@ -17,7 +28,8 @@ public class WavesController : MonoBehaviour
         await SpawnWave(w[7]);
         await SpawnWave(w[8]);
         await SpawnWave(w[9]);
-        await SpawnWave(w[10]);       
+        await SpawnWave(w[10]);
+        lastWave = true;
 
     }
     private async Awaitable SpawnWave(Wave wave)
@@ -26,14 +38,16 @@ public class WavesController : MonoBehaviour
         {
             await Awaitable.WaitForSecondsAsync(wave.spawnSpeed);
             int random = UnityEngine.Random.Range(0, 3);
-
             Vector3 position = s[random].position;
             Instantiate(wave.enemyPrefab, position, Quaternion.identity);
-
+            skeletonCount1 += 1;
+            
         }
         await Awaitable.WaitForSecondsAsync(wave.spawnTimeOut);
 
     }
+    
+
 }
 [Serializable]
 public class Wave
