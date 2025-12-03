@@ -64,6 +64,7 @@ public class GoldCountUi : MonoBehaviour
 
             if (timer >= 200)
             {
+                FindAnyObjectByType<GameManager>().town.isFinished = true;
                 SceneManager.LoadScene("Win");
 
             }

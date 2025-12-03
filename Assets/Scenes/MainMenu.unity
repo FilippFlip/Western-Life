@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8e4de6c17454c419315bf3859ed35a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: SampleScene
+  menu: Town
 --- !u!1 &80789657
 GameObject:
   m_ObjectHideFlags: 0

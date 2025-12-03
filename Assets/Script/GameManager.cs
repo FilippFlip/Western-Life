@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public SceneState tutorial = new();
     public SceneState town = new();
-    public SceneState canyon=new();
-    public SceneState celebration=new();
+    public SceneState canyon = new();
+    public SceneState celebration = new();
 
     public Sprite unlockedImage;
     public Sprite lockedImage;
@@ -46,4 +46,5 @@ public class SceneState
     public bool isFinished;
     public bool locked;
     public Image buttonImage;
+    
 }

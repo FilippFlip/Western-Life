@@ -15,7 +15,9 @@ public class WavesController : MonoBehaviour
             skeletonCount1 -= 1;
             if (skeletonCount1 == 0 && lastWave == true)
             {
+                FindAnyObjectByType<GameManager>().canyon.isFinished = true;
                 SceneManager.LoadScene("Win");
+
             }
         };
         await SpawnWave(w[0]);
