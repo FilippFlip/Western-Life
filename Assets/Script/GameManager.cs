@@ -1,5 +1,6 @@
 using System;
-using UnityEditor.SearchService;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     public Sprite unlockedImage;
     public Sprite lockedImage;
+
+    public List<SceneState> states = new();
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -19,8 +22,12 @@ public class GameManager : MonoBehaviour
         town.locked = true;
         celebration.locked = true;
         tutorial.locked = false;
+        
+        states.Add(tutorial);
+        states.Add(town);
+        states.Add(canyon);
+        states.Add(celebration);
     }
-
     void Update()
     {
         if (tutorial.isFinished)
@@ -38,7 +45,6 @@ public class GameManager : MonoBehaviour
         canyon.buttonImage.sprite = canyon.locked ? lockedImage : unlockedImage;
         celebration.buttonImage.sprite = celebration.locked ? lockedImage : unlockedImage;
     }
-    
 }
 [Serializable]
 public class SceneState
@@ -46,5 +52,5 @@ public class SceneState
     public bool isFinished;
     public bool locked;
     public Image buttonImage;
-    
+    public SceneAsset scene;
 }
