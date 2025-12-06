@@ -20,5 +20,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lose.unity
     guid: 8954a7e5069f67c42866664cd4649fd6
+  - enabled: 1
+    path: Assets/Scenes/GameCompeted.unity
+    guid: 308b7cd3b33708b459a52414b6c187d1
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 5ff93c85d1d1ae94daf3d2dbf5b5f95e
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

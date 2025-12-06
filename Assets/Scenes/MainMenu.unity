@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8e4de6c17454c419315bf3859ed35a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: Town
+  scene: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
 --- !u!1 &80789657
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,7 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8e4de6c17454c419315bf3859ed35a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: Canyon
+  scene: {fileID: 102900000, guid: c4c0a1d623318a6459abfb03994edd0b, type: 3}
 --- !u!1 &435110339
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,6 +583,7 @@ GameObject:
   - component: {fileID: 435110342}
   - component: {fileID: 435110341}
   - component: {fileID: 435110343}
+  - component: {fileID: 435110344}
   m_Layer: 5
   m_Name: tutorial
   m_TagString: Untagged
@@ -690,7 +691,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 435110341}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 435110344}
+        m_TargetAssemblyTypeName: ButonController, Assembly-CSharp
+        m_MethodName: Load
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &435110344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435110339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8e4de6c17454c419315bf3859ed35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: {fileID: 102900000, guid: 5ff93c85d1d1ae94daf3d2dbf5b5f95e, type: 3}
 --- !u!1 &437739345
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,6 +729,7 @@ GameObject:
   - component: {fileID: 437739349}
   - component: {fileID: 437739348}
   - component: {fileID: 437739347}
+  - component: {fileID: 437739350}
   m_Layer: 5
   m_Name: celb
   m_TagString: Untagged
@@ -772,7 +799,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 437739348}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 437739350}
+        m_TargetAssemblyTypeName: ButonController, Assembly-CSharp
+        m_MethodName: Load
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &437739348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,6 +850,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437739345}
   m_CullTransparentMesh: 1
+--- !u!114 &437739350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437739345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8e4de6c17454c419315bf3859ed35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: {fileID: 102900000, guid: 308b7cd3b33708b459a52414b6c187d1, type: 3}
 --- !u!1 &650297942
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,20 +971,25 @@ MonoBehaviour:
     isFinished: 0
     locked: 0
     buttonImage: {fileID: 435110341}
+    scene: {fileID: 102900000, guid: 5ff93c85d1d1ae94daf3d2dbf5b5f95e, type: 3}
   town:
     isFinished: 0
     locked: 0
     buttonImage: {fileID: 25674429}
+    scene: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
   canyon:
     isFinished: 0
     locked: 0
     buttonImage: {fileID: 315380706}
+    scene: {fileID: 102900000, guid: c4c0a1d623318a6459abfb03994edd0b, type: 3}
   celebration:
     isFinished: 0
     locked: 0
     buttonImage: {fileID: 437739348}
+    scene: {fileID: 102900000, guid: 308b7cd3b33708b459a52414b6c187d1, type: 3}
   unlockedImage: {fileID: 21300000, guid: 4f51c31b48a4e1041b3e198b51ff0566, type: 3}
   lockedImage: {fileID: 21300068, guid: 1d61b6b6ab998df4c84f4571a527df9d, type: 3}
+  states: []
 --- !u!4 &1161084688
 Transform:
   m_ObjectHideFlags: 0

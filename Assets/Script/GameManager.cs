@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public Sprite lockedImage;
 
     public List<SceneState> states = new();
-    void Start()
+    void Awake()
     {
         DontDestroyOnLoad(gameObject);
         canyon.locked = true;
