@@ -4762,7 +4762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1252296416
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5450,8 +5450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac48842f48274348b8d45170f8bad6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activate: {fileID: 0}
-  deactivate: {fileID: 0}
+  activate: {fileID: 1197709947}
+  deactivate: {fileID: 1197709947}
   lastSlide: 1
 --- !u!114 &1733683026
 MonoBehaviour:
@@ -6689,7 +6689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2044255727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6997,8 +6997,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -83.278946}
-  m_SizeDelta: {x: 1110, y: 426.4679}
+  m_AnchoredPosition: {x: 0, y: -0.1585}
+  m_SizeDelta: {x: 1110, y: 260.227}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2111536796
 MonoBehaviour:
@@ -7099,7 +7099,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 14.276978, y: 0, z: 7.8837585, w: 163.84851}
+  m_margin: {x: 14.276978, y: 0, z: 7.8837585, w: 0.6579437}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
