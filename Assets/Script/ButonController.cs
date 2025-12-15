@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,7 @@ public class ButonController : MonoBehaviour
     public SceneAsset scene;
     private Image image;
     private SceneState stater;
+
     private void Start()
     {
         image = GetComponent<Image>();

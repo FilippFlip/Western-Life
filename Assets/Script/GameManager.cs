@@ -40,10 +40,14 @@ public class GameManager : MonoBehaviour
         {
             celebration.locked = false;
         }
-        tutorial.buttonImage.sprite=tutorial.locked?lockedImage: unlockedImage;
-        town.buttonImage.sprite = town.locked ? lockedImage : unlockedImage;
-        canyon.buttonImage.sprite = canyon.locked ? lockedImage : unlockedImage;
-        celebration.buttonImage.sprite = celebration.locked ? lockedImage : unlockedImage;
+        if(tutorial.buttonImage)
+            tutorial.buttonImage.sprite=tutorial.locked?lockedImage: unlockedImage;
+        if(town.buttonImage)
+            town.buttonImage.sprite = town.locked ? lockedImage : unlockedImage;
+        if(canyon.buttonImage)
+            canyon.buttonImage.sprite = canyon.locked ? lockedImage : unlockedImage;
+        if(celebration.buttonImage)
+            celebration.buttonImage.sprite = celebration.locked ? lockedImage : unlockedImage;
     }
 }
 [Serializable]
