@@ -13,10 +13,16 @@ public class GameManager : MonoBehaviour
 
     public Sprite unlockedImage;
     public Sprite lockedImage;
-
+    public static GameManager instance;
     public List<SceneState> states = new();
     void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
         DontDestroyOnLoad(gameObject);
         canyon.locked = true;
         town.locked = true;
