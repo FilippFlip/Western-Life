@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public SceneState tutorial = new();
-    public SceneState town = new();
-    public SceneState canyon = new();
-    public SceneState celebration = new();
+    public SceneState tutorial ;
+    public SceneState town ;
+    public SceneState canyon;
+    public SceneState celebration;
 
     public Sprite unlockedImage;
     public Sprite lockedImage;
@@ -24,6 +24,10 @@ public class GameManager : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
+        canyon = new();
+        town = new();
+        tutorial = new();
+        celebration = new();
         canyon.locked = true;
         town.locked = true;
         celebration.locked = true;
