@@ -1,12 +1,11 @@
 using System;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ButonController : MonoBehaviour
 {
-    public SceneAsset scene;
+    public string scene;
     private Image image;
     private SceneState stater;
 
@@ -17,7 +16,7 @@ public class ButonController : MonoBehaviour
         var manager = FindAnyObjectByType<GameManager>();
         foreach (SceneState state in manager.states)
         {
-            if (state.scene.name == scene.name)
+            if (state.scene == scene)
             {
                 state.buttonImage = image;
                 this.stater = state;
@@ -28,7 +27,7 @@ public class ButonController : MonoBehaviour
     {
         if (stater.locked==false)
         {
-            SceneManager.LoadScene(scene.name);
+            SceneManager.LoadScene(scene);
         }
         
     }

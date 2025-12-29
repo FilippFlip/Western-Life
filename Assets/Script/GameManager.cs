@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,5 +65,5 @@ public class SceneState
     public bool isFinished;
     public bool locked;
     public Image buttonImage;
-    public SceneAsset scene;
+    public string scene;
 }
